@@ -31,16 +31,16 @@ function Usuario( {nombre, cargo, id}) {
         <>
 
             <div style={{ border: '1px solid #ccc', margin: '10px', padding: '10px' }}>
-            <h3 style={{ color: estaActivo ? 'green' : 'red'}}>{nombre}</h3>
-            <p> Cargo: {cargo} </p>
-            
-            <div>
-                <span>Likes: {likes}</span> 
-                <button onClick={handleLike}>👍 Me gusta</button>
-                <button onClick={handleActivo}>{estaActivo ? 'Desactivar Usuario' : 'Activar Usuario'}</button>
-                <Link to={`/usuarios/${id}`}>Detalle Usuario</Link>
+                <h3 style={{ color: estaActivo ? 'green' : 'red'}}>{nombre}</h3>
+                <p> Cargo: {cargo} </p>
+                
+                <div>
+                    <span>Likes: {likes}</span> 
+                    <button onClick={handleLike}>👍 Me gusta</button>
+                    <button onClick={handleActivo}>{estaActivo ? 'Desactivar Usuario' : 'Activar Usuario'}</button>
+                    <Link to={`/usuarios/${id}`}>Detalle Usuario</Link>
+                </div>
             </div>
-        </div>
         </>
     )
 }
