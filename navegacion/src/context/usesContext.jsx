@@ -8,7 +8,8 @@ export const UserContext = createContext()
 
 export const UserProvider = ({children}) =>{
 
-    const [userLogueado, setUserLogueado] = useState('Bienvenido Invitado')
+    const [userLogueado, setUserLogueado] = useState(null); 
+    const [cargando, setCargando] = useState(true); 
     const [tema, setTema] = useState('light')
 
     const toggleTheme = () => {
@@ -16,19 +17,19 @@ export const UserProvider = ({children}) =>{
     };
 
     useEffect(() => {
-        // Esto se queda escuchando si el usuario está logueado o no
-        const unsustribe = onAuthStateChanged(auth, (user) => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
-                setUserLogueado(user.email); // Guardamos el email real
+                setUserLogueado(user.email);
             } else {
                 setUserLogueado("Invitado");
             }
+            setCargando(false); // <--- Importante: Ya terminó de verificar
         });
-        return () => unsustribe(); // Limpieza al desmontar
+        return () => unsubscribe();
     }, []);
 
     return(
-        <UserContext.Provider value ={{userLogueado, setUserLogueado, tema, toggleTheme }}>
+        <UserContext.Provider value={{ userLogueado, cargando, tema, toggleTheme }}>
             {children}
         </UserContext.Provider>
     )
